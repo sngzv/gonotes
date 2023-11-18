@@ -19,6 +19,14 @@ func showNote(w http.ResponseWriter, r *http.Request) {
 }
 
 func createNote(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		w.Header().Set("Allow", http.MethodPost)
+		//w.WriteHeader(405)
+		//w.Write([]byte("Allow only POST-method"))
+		http.Error(w, "Allow only POST-method", 405)
+		return
+	}
+
 	w.Write([]byte("Form for create a new note..."))
 }
 
